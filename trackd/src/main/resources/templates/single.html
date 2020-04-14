@@ -53,9 +53,9 @@
             <div class="post-heading">
               <h1 th:text="${tracklist.name}"></h1>
               <h2 class="subheading" th:text="${tracklist.description}"></h2>
-              <span class="meta">Posted by
-                <a href="#">Andrew Smith</a>
-                on April 13, 2020</span>
+              <span class="meta">Created by
+                <span th:text="${tracklist.author}"></span>
+                on <span th:text="${tracklist.date}"></span></span>
             </div>
           </div>
         </div>
@@ -81,24 +81,23 @@
             </tbody>
           </table>
           <hr>
-          <p>Want to add a song to this lovely list? Use the form below.</p>     
+          <p>The list feeling a little short? Use the form below.</p>     
           <form action="#" th:action="@{/tracklists/{id}/tracks(id = ${tracklist.id})}" method="post">
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Title</label>
                 <input type="text" class="form-control" placeholder="Title" id="title" th:field="${track.title}">
-                <p class="help-block text-danger"></p>
+                <p th:if="${#fields.hasErrors('track.title')}" th:errors="*{track.title}" class="help-block text-danger">Title Error</p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Artist</label>
                 <input type="text" class="form-control" placeholder="Artist" id="artist" th:field="${track.artist}">
-                <p class="help-block text-danger"></p>
+                <p th:if="${#fields.hasErrors('track.artist')}" th:errors="*{track.artist}" class="help-block text-danger">Artist Error</p>
               </div>
             </div>
             <br>
-            <div id="success"></div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary" id="sendMessageButton">Add</button>
             </div>

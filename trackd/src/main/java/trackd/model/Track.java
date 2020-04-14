@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -17,8 +18,10 @@ public class Track {
 	@GeneratedValue
 	private Long id;
 
+	@NotBlank(message = "Title is required")
 	private String title;
-	
+
+	@NotBlank(message = "Artist is required")
 	private String artist;
 	
 	@ManyToMany(mappedBy = "tracks")

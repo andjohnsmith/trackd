@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -19,9 +20,15 @@ public class Tracklist {
 	@GeneratedValue
 	private Long id;
 	
+	@NotBlank(message = "Tracklist name is required")
 	private String name;
-	
+
 	private String description;
+
+	@NotBlank(message = "Author is required")
+	private String author;
+	
+	private String date;
 	
 	@ManyToMany
 	@JoinTable(
